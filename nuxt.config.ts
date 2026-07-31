@@ -1,28 +1,54 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    '@nuxt/eslint',
-    '@nuxt/ui'
-  ],
+  modules: ['@nuxt/ui'],
+
+  css: ['~/assets/css/main.css'],
+
+  ui: {
+    fonts: false
+  },
 
   devtools: {
     enabled: true
   },
 
-  css: ['~/assets/css/main.css'],
+  runtimeConfig: {
+    // 只能在服务端读取
+    contactWebhookUrl: '',
 
-  routeRules: {
-    '/': { prerender: true }
+    public: {
+      siteName: '个人技术主页',
+      siteUrl: 'http://127.0.0.1:3000'
+    }
   },
 
-  compatibilityDate: '2026-06-30',
+  routeRules: {
+    '/': {
+      prerender: true
+    },
 
-  eslint: {
-    config: {
-      stylistic: {
-        commaDangle: 'never',
-        braceStyle: '1tbs'
-      }
+    '/projects': {
+      prerender: true
+    },
+
+    '/privacy': {
+      prerender: true
     }
-  }
+  },
+
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'zh-CN'
+      },
+
+      meta: [
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1'
+        }
+      ]
+    }
+  },
+
+  compatibilityDate: '2026-07-31'
 })
