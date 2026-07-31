@@ -1,53 +1,24 @@
 export default defineNuxtConfig({
   modules: ['@nuxt/ui'],
 
-  css: ['~/assets/css/main.css'],
-
   ui: {
     fonts: false
   },
 
-  devtools: {
-    enabled: true
-  },
-
-  runtimeConfig: {
-    // 只能在服务端读取
-    contactWebhookUrl: '',
-
-    public: {
-      siteName: '个人技术主页',
-      siteUrl: 'http://127.0.0.1:3000'
-    }
-  },
-
   routeRules: {
+    // 目前只有首页，所以只预渲染首页
     '/': {
       prerender: true
     },
 
-    '/projects': {
-      prerender: true
-    },
-
-    '/privacy': {
-      prerender: true
+    // API必须保留为动态接口，不参与页面预渲染
+    '/api/**': {
+      prerender: false
     }
   },
 
-  app: {
-    head: {
-      htmlAttrs: {
-        lang: 'zh-CN'
-      },
-
-      meta: [
-        {
-          name: 'viewport',
-          content: 'width=device-width, initial-scale=1'
-        }
-      ]
-    }
+  devtools: {
+    enabled: true
   },
 
   compatibilityDate: '2026-07-31'
